@@ -1,0 +1,77 @@
+{
+  "jameson_version": "0.3",
+  "info": {
+    "description": "News snippet NER: sentence spans containing entity-mention spans, coreference via tracks. Text: \"Dr. Chen was named chief scientist at Acme Corp. She starts in March.\""
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "articles/chen_appointment.txt",
+      "file_type": "txt"
+    }
+  ],
+  "parts": [
+    { "id": 10, "file_id": 1, "type": "track", "name": "entity_chen" },
+    { "id": 11, "file_id": 1, "type": "track", "name": "entity_acme" },
+
+    { "id": 100, "file_id": 1, "type": "span", "name": "sentence_1",
+      "locator": { "start_char": 0, "end_char": 48 } },
+    { "id": 101, "file_id": 1, "type": "span", "name": "sentence_2",
+      "locator": { "start_char": 49, "end_char": 69 } },
+
+    { "id": 200, "file_id": 1, "type": "span", "parent_part_id": 100, "track_id": 10,
+      "locator": { "start_char": 0, "end_char": 8 } },
+    { "id": 201, "file_id": 1, "type": "span", "parent_part_id": 100, "track_id": 11,
+      "locator": { "start_char": 38, "end_char": 47 } },
+    { "id": 202, "file_id": 1, "type": "span", "parent_part_id": 101, "track_id": 10,
+      "locator": { "start_char": 49, "end_char": 52 } }
+  ],
+  "fields": [
+    { "id": 1, "name": "mention_form", "label": "Mention Form", "type": "single_select",
+      "render": "radio",
+      "options": [
+        { "value": "proper", "label": "Proper Noun" },
+        { "value": "pronoun", "label": "Pronoun" },
+        { "value": "nominal", "label": "Nominal" }
+      ] },
+    { "id": 2, "name": "entity_type", "label": "Entity Type", "type": "single_select",
+      "options": [
+        { "value": "person", "label": "Person" },
+        { "value": "organization", "label": "Organization" },
+        { "value": "location", "label": "Location" }
+      ] },
+    { "id": 3, "name": "canonical_name", "label": "Canonical Name", "type": "text",
+      "constraints": { "max_length": 200 } },
+    { "id": 4, "name": "sentence_sentiment", "label": "Sentence Sentiment", "type": "single_select",
+      "options": [
+        { "value": "positive", "label": "Positive" },
+        { "value": "neutral", "label": "Neutral" },
+        { "value": "negative", "label": "Negative" }
+      ] }
+  ],
+  "categories": [],
+  "annotations": [
+    { "id": 900, "part_id": 10,
+      "values": [
+        { "field_id": 2, "value": "person" },
+        { "field_id": 3, "value": "Dr. Amara Chen" }
+      ] },
+    { "id": 901, "part_id": 11,
+      "values": [
+        { "field_id": 2, "value": "organization" },
+        { "field_id": 3, "value": "Acme Corp" }
+      ] },
+
+    { "id": 902, "part_id": 100,
+      "values": [ { "field_id": 4, "value": "positive" } ] },
+    { "id": 903, "part_id": 101,
+      "values": [ { "field_id": 4, "value": "neutral" } ] },
+
+    { "id": 910, "part_id": 200,
+      "values": [ { "field_id": 1, "value": "proper" } ] },
+    { "id": 911, "part_id": 201,
+      "values": [ { "field_id": 1, "value": "proper" } ] },
+    { "id": 912, "part_id": 202,
+      "values": [ { "field_id": 1, "value": "pronoun" } ] }
+  ]
+}

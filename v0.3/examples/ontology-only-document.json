@@ -1,0 +1,107 @@
+{
+  "jameson_version": "0.3",
+  "info": {
+    "description": "Standalone ontology document (spec section 13): a complete labeling form with no annotation data, suitable for upload into a labeling tool",
+    "ontology": {
+      "name": "product-photo-qa",
+      "version": 3,
+      "description": "QA form for product photography with defect marking"
+    }
+  },
+  "files": [],
+  "parts": [],
+  "fields": [
+    {
+      "id": 1,
+      "name": "passes_qa",
+      "label": "Passes QA?",
+      "type": "boolean",
+      "required": true
+    },
+    {
+      "id": 2,
+      "name": "failure_reason",
+      "label": "Failure Reason",
+      "type": "single_select",
+      "render": "radio",
+      "required": true,
+      "visible_when": { "field_name": "passes_qa", "operator": "is_false" },
+      "options": [
+        { "value": "blurry", "label": "Blurry" },
+        { "value": "bad_lighting", "label": "Bad Lighting" },
+        { "value": "wrong_product", "label": "Wrong Product" },
+        { "value": "defect_visible", "label": "Defect Visible" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "defect_count",
+      "label": "Defect Count",
+      "type": "number",
+      "visible_when": { "field_name": "failure_reason", "operator": "equals", "values": ["defect_visible"] },
+      "constraints": { "integer": true, "min": 1, "max": 50 }
+    },
+    {
+      "id": 4,
+      "name": "confidence",
+      "label": "Confidence",
+      "type": "number",
+      "render": "slider",
+      "description": "Labeler confidence in the QA verdict",
+      "constraints": { "exclusive_min": 0, "max": 1, "step": 0.05 }
+    },
+    {
+      "id": 5,
+      "name": "tags",
+      "label": "Tags",
+      "type": "multi_select",
+      "render": "checklist",
+      "constraints": { "max_items": 3 },
+      "options": [
+        { "value": "hero_shot", "label": "Hero Shot" },
+        { "value": "lifestyle", "label": "Lifestyle" },
+        { "value": "detail", "label": "Detail" },
+        { "value": "packaging", "label": "Packaging" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "product_line",
+      "label": "Product Line",
+      "type": "cascading_select",
+      "required": true,
+      "require_full_path": false,
+      "levels": [
+        { "label": "Department" },
+        { "label": "Category" }
+      ],
+      "taxonomy": [
+        { "value": "apparel", "label": "Apparel",
+          "children": [
+            { "value": "outerwear", "label": "Outerwear" },
+            { "value": "footwear", "label": "Footwear" }
+          ] },
+        { "value": "electronics", "label": "Electronics" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "photographer_email",
+      "label": "Photographer Email",
+      "type": "text",
+      "constraints": { "format": "email" }
+    },
+    {
+      "id": 8,
+      "name": "defect_region",
+      "label": "Defect Region",
+      "type": "bbox",
+      "description": "Declares the bounding-box drawing tool for marking defects"
+    }
+  ],
+  "categories": [
+    { "id": 1, "name": "product", "label": "Product" },
+    { "id": 2, "name": "prop", "label": "Prop" }
+  ],
+  "annotations": []
+}

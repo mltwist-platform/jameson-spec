@@ -1,0 +1,73 @@
+{
+  "jameson_version": "0.3",
+  "info": {
+    "description": "Traffic video: two cars tracked across frames, identity values on tracks, per-frame state on regions, a temporal occlusion segment"
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "traffic_001.mp4",
+      "file_type": "mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "frame_count": 900,
+      "duration_seconds": 30.0
+    }
+  ],
+  "parts": [
+    { "id": 200, "file_id": 1, "type": "track", "name": "car_track_07" },
+    { "id": 201, "file_id": 1, "type": "track", "name": "car_track_08" },
+
+    { "id": 1001, "file_id": 1, "type": "frame", "locator": { "frame_index": 42, "timestamp": 1.4 } },
+    { "id": 1002, "file_id": 1, "type": "frame", "locator": { "frame_index": 43, "timestamp": 1.433 } },
+
+    { "id": 1101, "file_id": 1, "type": "region", "parent_part_id": 1001, "track_id": 200,
+      "keyframe": true },
+    { "id": 1102, "file_id": 1, "type": "region", "parent_part_id": 1001, "track_id": 201 },
+    { "id": 1103, "file_id": 1, "type": "region", "parent_part_id": 1002, "track_id": 200,
+      "keyframe": true },
+
+    { "id": 300, "file_id": 1, "type": "segment", "name": "car_08_occluded_span",
+      "track_id": 201, "locator": { "start_frame": 40, "end_frame": 55 } }
+  ],
+  "fields": [
+    { "id": 1, "name": "bbox", "label": "Bounding Box", "type": "bbox" },
+    { "id": 2, "name": "occluded", "label": "Occluded", "type": "boolean" },
+    { "id": 3, "name": "license_plate", "label": "License Plate", "type": "text",
+      "constraints": { "max_length": 10 } },
+    { "id": 4, "name": "occlusion_cause", "label": "Occlusion Cause", "type": "single_select",
+      "options": [
+        { "value": "vehicle", "label": "Another Vehicle" },
+        { "value": "infrastructure", "label": "Infrastructure" },
+        { "value": "unknown", "label": "Unknown" }
+      ] }
+  ],
+  "categories": [
+    { "id": 1, "name": "car", "label": "Car", "supercategory": "vehicle" }
+  ],
+  "annotations": [
+    { "id": 9000, "part_id": 200, "category_id": 1,
+      "values": [ { "field_id": 3, "value": "7ABC123" } ] },
+    { "id": 9001, "part_id": 201, "category_id": 1, "values": [] },
+
+    { "id": 9101, "part_id": 1101,
+      "values": [
+        { "field_id": 1, "value": [320, 480, 210, 130] },
+        { "field_id": 2, "value": false }
+      ] },
+    { "id": 9102, "part_id": 1102,
+      "values": [
+        { "field_id": 1, "value": [900, 460, 180, 120] },
+        { "field_id": 2, "value": true }
+      ] },
+    { "id": 9103, "part_id": 1103,
+      "values": [
+        { "field_id": 1, "value": [335, 482, 212, 131] },
+        { "field_id": 2, "value": false }
+      ] },
+
+    { "id": 9200, "part_id": 300,
+      "values": [ { "field_id": 4, "value": "vehicle" } ] }
+  ]
+}
