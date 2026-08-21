@@ -1,0 +1,76 @@
+{
+  "jameson_version": "0.4",
+  "info": {
+    "description": "Human pose estimation with named keypoints, per-point visibility, and a rendering skeleton"
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "street_scene_014.png",
+      "file_type": "png",
+      "width": 1280,
+      "height": 960
+    }
+  ],
+  "parts": [
+    { "id": 100, "file_id": 1, "type": "file", "name": "street_scene_014" },
+    { "id": 101, "file_id": 1, "type": "region", "name": "person_1", "parent_part_id": 100 }
+  ],
+  "fields": [
+    {
+      "id": 1,
+      "name": "body_pose",
+      "label": "Body Pose",
+      "type": "keypoints",
+      "points": [
+        { "name": "nose", "label": "Nose" },
+        { "name": "left_shoulder", "label": "Left Shoulder" },
+        { "name": "right_shoulder", "label": "Right Shoulder" },
+        { "name": "left_hip", "label": "Left Hip" },
+        { "name": "right_hip", "label": "Right Hip" }
+      ],
+      "skeleton": [
+        ["nose", "left_shoulder"],
+        ["nose", "right_shoulder"],
+        ["left_shoulder", "right_shoulder"],
+        ["left_shoulder", "left_hip"],
+        ["right_shoulder", "right_hip"],
+        ["left_hip", "right_hip"]
+      ]
+    },
+    {
+      "id": 2,
+      "name": "activity",
+      "label": "Activity",
+      "type": "single_select",
+      "render": "radio",
+      "options": [
+        { "value": "walking", "label": "Walking" },
+        { "value": "standing", "label": "Standing" },
+        { "value": "sitting", "label": "Sitting" }
+      ]
+    }
+  ],
+  "categories": [
+    { "id": 1, "name": "person", "label": "Person" }
+  ],
+  "annotations": [
+    {
+      "id": 1001,
+      "part_id": 101,
+      "category_id": 1,
+      "values": [
+        {
+          "field_id": 1,
+          "value": {
+            "nose": { "position": [612, 220], "visibility": "visible" },
+            "left_shoulder": { "position": [578, 305], "visibility": "visible" },
+            "right_shoulder": { "position": [655, 302], "visibility": "occluded" },
+            "left_hip": { "position": [590, 470], "visibility": "visible" }
+          }
+        },
+        { "field_id": 2, "value": "walking" }
+      ]
+    }
+  ]
+}

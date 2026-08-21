@@ -1,0 +1,70 @@
+{
+  "jameson_version": "0.4",
+  "info": {
+    "description": "Interview audio: word-level transcription nested inside utterances, speaker diarization via tracks, file-level language tag"
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "interview_001.wav",
+      "file_type": "wav",
+      "duration_seconds": 62.5
+    }
+  ],
+  "parts": [
+    { "id": 1, "file_id": 1, "type": "file", "name": "interview_001" },
+
+    { "id": 10, "file_id": 1, "type": "track", "name": "speaker_A" },
+    { "id": 11, "file_id": 1, "type": "track", "name": "speaker_B" },
+
+    { "id": 100, "file_id": 1, "type": "segment", "name": "utterance_1", "track_id": 10,
+      "locator": { "start_time": 4.02, "end_time": 6.85 } },
+    { "id": 101, "file_id": 1, "type": "segment", "parent_part_id": 100, "track_id": 10,
+      "locator": { "start_time": 4.02, "end_time": 4.31 } },
+    { "id": 102, "file_id": 1, "type": "segment", "parent_part_id": 100, "track_id": 10,
+      "locator": { "start_time": 4.35, "end_time": 4.62 } },
+
+    { "id": 110, "file_id": 1, "type": "segment", "name": "utterance_2", "track_id": 11,
+      "locator": { "start_time": 7.10, "end_time": 9.44 } }
+  ],
+  "fields": [
+    { "id": 1, "name": "transcript", "label": "Transcript", "type": "text", "required": true },
+    { "id": 2, "name": "speaker_role", "label": "Speaker Role", "type": "single_select",
+      "options": [
+        { "value": "interviewer", "label": "Interviewer" },
+        { "value": "interviewee", "label": "Interviewee" }
+      ] },
+    { "id": 3, "name": "language", "label": "Language", "type": "single_select",
+      "options": [
+        { "value": "en", "label": "English" },
+        { "value": "es", "label": "Spanish" }
+      ] },
+    { "id": 4, "name": "crosstalk", "label": "Crosstalk Present", "type": "boolean" }
+  ],
+  "categories": [],
+  "annotations": [
+    { "id": 900, "part_id": 1,
+      "values": [ { "field_id": 3, "value": "en" } ] },
+
+    { "id": 910, "part_id": 10,
+      "values": [ { "field_id": 2, "value": "interviewer" } ] },
+    { "id": 911, "part_id": 11,
+      "values": [ { "field_id": 2, "value": "interviewee" } ] },
+
+    { "id": 920, "part_id": 100,
+      "values": [
+        { "field_id": 1, "value": "turn left at the light" },
+        { "field_id": 4, "value": false }
+      ] },
+    { "id": 921, "part_id": 101,
+      "values": [ { "field_id": 1, "value": "turn" } ] },
+    { "id": 922, "part_id": 102,
+      "values": [ { "field_id": 1, "value": "left" } ] },
+
+    { "id": 930, "part_id": 110,
+      "values": [
+        { "field_id": 1, "value": "okay, got it" },
+        { "field_id": 4, "value": false }
+      ] }
+  ]
+}

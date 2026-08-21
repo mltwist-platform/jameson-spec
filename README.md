@@ -83,7 +83,8 @@ Key rules that keep the format interoperable (all consequences of the core princ
 
 | Version | Status | Spec | Examples |
 | --- | --- | --- | --- |
-| [v0.3](v0.3/README.md) | Current draft | [v0.3/README.md](v0.3/README.md) | [v0.3/examples/](v0.3/examples/) |
+| [v0.4](v0.4/README.md) | Current draft | [v0.4/README.md](v0.4/README.md) | [v0.4/examples/](v0.4/examples/) |
+| [v0.3](v0.3/README.md) | Superseded | [v0.3/README.md](v0.3/README.md) | [v0.3/examples/](v0.3/examples/) |
 
 Each version directory is immutable once superseded: it contains that version's full specification and example documents that conform to it. Minor versions add optional fields and registry entries without breaking existing files; consumers must ignore unknown fields.
 
@@ -93,7 +94,7 @@ A spreadsheet row classified by a form with a radio field:
 
 ```json
 {
-  "jameson_version": "0.3",
+  "jameson_version": "0.4",
   "info": { "description": "Invoice row classification" },
   "files": [ { "id": 1, "file_name": "invoices_q3.xlsx", "file_type": "xlsx" } ],
   "parts": [
@@ -116,7 +117,7 @@ A spreadsheet row classified by a form with a radio field:
 }
 ```
 
-See [v0.3/examples/](v0.3/examples/) for complete documents covering object detection, pose, video multi-object tracking, speech diarization, text NER with coreference, GLB quality review, spreadsheet labeling, PDF labeling, and a standalone ontology document.
+See [v0.4/examples/](v0.4/examples/) for complete documents covering object detection, pose, video multi-object tracking, speech diarization, text NER with coreference, GLB quality review, spreadsheet labeling, PDF labeling, and a standalone ontology document.
 
 ## License
 

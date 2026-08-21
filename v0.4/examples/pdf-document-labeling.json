@@ -1,0 +1,51 @@
+{
+  "jameson_version": "0.4",
+  "info": {
+    "description": "Contract PDF: page-level classification plus a signature region drawn on a page"
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "contracts/msa_acme_2026.pdf",
+      "file_type": "pdf"
+    }
+  ],
+  "parts": [
+    { "id": 100, "file_id": 1, "type": "file", "name": "msa_acme_2026" },
+    { "id": 201, "file_id": 1, "type": "page", "parent_part_id": 100,
+      "locator": { "page_index": 0 } },
+    { "id": 202, "file_id": 1, "type": "page", "parent_part_id": 100,
+      "locator": { "page_index": 11 } },
+    { "id": 301, "file_id": 1, "type": "region", "name": "signature_block",
+      "parent_part_id": 202 }
+  ],
+  "fields": [
+    { "id": 1, "name": "page_type", "label": "Page Type", "type": "single_select",
+      "required": true,
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "terms", "label": "Terms" },
+        { "value": "signature_page", "label": "Signature Page" },
+        { "value": "exhibit", "label": "Exhibit" }
+      ] },
+    { "id": 2, "name": "bbox", "label": "Bounding Box", "type": "bbox",
+      "description": "Region on the rendered page, absolute pixels at the page's rendered resolution" },
+    { "id": 3, "name": "signed", "label": "Signature Present", "type": "boolean" },
+    { "id": 4, "name": "counterparty_email", "label": "Counterparty Email", "type": "text",
+      "constraints": { "format": "email" } }
+  ],
+  "categories": [],
+  "annotations": [
+    { "id": 1000, "part_id": 100,
+      "values": [ { "field_id": 4, "value": "legal@acme.example.com" } ] },
+    { "id": 1001, "part_id": 201,
+      "values": [ { "field_id": 1, "value": "cover" } ] },
+    { "id": 1002, "part_id": 202,
+      "values": [ { "field_id": 1, "value": "signature_page" } ] },
+    { "id": 1003, "part_id": 301,
+      "values": [
+        { "field_id": 2, "value": [96, 1180, 420, 160] },
+        { "field_id": 3, "value": true }
+      ] }
+  ]
+}

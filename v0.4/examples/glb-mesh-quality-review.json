@@ -1,0 +1,68 @@
+{
+  "jameson_version": "0.4",
+  "info": {
+    "description": "Multi-mesh GLB quality review: per-mesh QA form with conditional fields, scene-graph hierarchy via parent_part_id + node_path locators, 3D cuboid damage region",
+    "contributor": "MLtwist",
+    "ontology": { "name": "glb-quality-review", "version": 7 }
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "vehicles/car_001.glb",
+      "file_type": "glb",
+      "source_id": "8f14e45f-ceea-4e2b-9c5d-0d1b2f3a4c5e",
+      "extra": { "num_meshes": 8 }
+    }
+  ],
+  "parts": [
+    { "id": 100, "file_id": 1, "type": "file", "name": "car_001" },
+    { "id": 101, "file_id": 1, "type": "mesh", "name": "Body", "parent_part_id": 100,
+      "locator": { "node_path": "Root/Body[0]" } },
+    { "id": 102, "file_id": 1, "type": "mesh", "name": "Hood", "parent_part_id": 101,
+      "locator": { "node_path": "Root/Body[0]/Hood[0]" } },
+    { "id": 103, "file_id": 1, "type": "mesh", "name": "Wheel_FL", "parent_part_id": 101,
+      "locator": { "node_path": "Root/Body[0]/Wheel[1]" } },
+    { "id": 104, "file_id": 1, "type": "mesh", "name": "Wheel_FR", "parent_part_id": 101,
+      "locator": { "node_path": "Root/Body[0]/Wheel[2]" } },
+    { "id": 105, "file_id": 1, "type": "region", "name": "dent_1", "parent_part_id": 101 }
+  ],
+  "fields": [
+    { "id": 1, "name": "is_quality_good", "label": "Quality OK?", "type": "boolean", "required": true },
+    { "id": 2, "name": "failure_reason", "label": "Failure Reason", "type": "single_select",
+      "render": "radio",
+      "visible_when": { "field_name": "is_quality_good", "operator": "is_false" },
+      "required": true,
+      "options": [
+        { "value": "missing_geometry", "label": "Missing Geometry" },
+        { "value": "bad_topology", "label": "Bad Topology" },
+        { "value": "texture_issue", "label": "Texture Issue" },
+        { "value": "other", "label": "Other" }
+      ] },
+    { "id": 3, "name": "notes", "label": "Notes", "type": "text", "render": "textarea",
+      "visible_when": { "field_name": "is_quality_good", "operator": "is_false" },
+      "constraints": { "max_length": 2000 } },
+    { "id": 4, "name": "damage_bounds", "label": "Damage Bounds", "type": "bbox3d",
+      "description": "3D cuboid in the asset's glTF scene space (right-handed, +Y up, meters)" }
+  ],
+  "categories": [],
+  "annotations": [
+    { "id": 1000, "part_id": 100,
+      "values": [ { "field_id": 1, "value": true } ] },
+    { "id": 1001, "part_id": 102,
+      "values": [ { "field_id": 1, "value": true } ] },
+    { "id": 1002, "part_id": 103,
+      "values": [
+        { "field_id": 1, "value": false },
+        { "field_id": 2, "value": "missing_geometry" },
+        { "field_id": 3, "value": "Wheel mesh present but hub cap geometry absent" }
+      ] },
+    { "id": 1003, "part_id": 105,
+      "values": [
+        { "field_id": 4, "value": {
+            "center": [0.42, 0.91, -0.18],
+            "size": [0.30, 0.22, 0.10],
+            "rotation": [0.0, 0.0, 0.0]
+          } }
+      ] }
+  ]
+}
