@@ -1,0 +1,513 @@
+{
+  "jameson_version": "0.5",
+  "description": "JAMESON v0.5 conformance cases. Every file under valid/ must validate. Every file under invalid/ breaks exactly one rule and must be rejected; `rule` is the spec section that rejects it.",
+  "cases": [
+    {
+      "file": "valid/simple-document.json",
+      "valid": true,
+      "description": "Answers only: no annotation carries `resolved`, at most one annotation per part, each one is the answer (§12.2)."
+    },
+    {
+      "file": "valid/multi-opinion-document.json",
+      "valid": true,
+      "description": "Two labelers, a consensus answer, each labeler's box as its own region and a separate resolved region (§12.1, §12.2)."
+    },
+    {
+      "file": "valid/media-parts-and-trees.json",
+      "valid": true,
+      "description": "Track, frame, region with keyframe, nested segments, GLB meshes with an escaped node_path, nested spans (§6, §7, §14)."
+    },
+    {
+      "file": "valid/unresolved-part.json",
+      "valid": true,
+      "description": "A part with opinions but no resolved: true annotation is unresolved, which is legal (§12.2 rule 3)."
+    },
+    {
+      "file": "valid/resolved-with-empty-values.json",
+      "valid": true,
+      "description": "An answer may have empty values ('decided: nothing to record') when no field is required (§12.2 rule 4)."
+    },
+    {
+      "file": "valid/answer-without-provenance.json",
+      "valid": true,
+      "description": "An answer whose origin is unknown carries resolved: true and no provenance (§12.3)."
+    },
+    {
+      "file": "valid/partial-opinion.json",
+      "valid": true,
+      "description": "An opinion may omit required fields; `required` applies to answers only (§10.2, §12.2 rule 5)."
+    },
+    {
+      "file": "valid/opinions-without-provenance.json",
+      "valid": true,
+      "description": "Two opinions with no provenance on one part are legal: ids distinguish them (§12.2)."
+    },
+    {
+      "file": "valid/absent-resolved-reads-as-opinion.json",
+      "valid": true,
+      "description": "In a multi-opinion document an annotation without `resolved` is an opinion (§12.2 rule 2). Warns: producers SHOULD write it explicitly."
+    },
+    {
+      "file": "valid/unanswered-region-opinion.json",
+      "valid": true,
+      "description": "A region carrying only an opinion is someone's drawing, not part of the answer, and is legal (§12.2 rule 6)."
+    },
+    {
+      "file": "valid/hidden-required-field-unanswered.json",
+      "valid": true,
+      "description": "A required field hidden by visible_when may be left unanswered (§10.2)."
+    },
+    {
+      "file": "valid/x-prefixed-extensions.json",
+      "valid": true,
+      "description": "x- part type, field type, render hint, and format are all legal (§2, §7, §8.3.1, §8.5, §9.6). Warns: the x- format is not validated."
+    },
+    {
+      "file": "valid/number-step-decimal.json",
+      "valid": true,
+      "description": "0.3 satisfies step 0.1 under decimal evaluation (§8.3.2)."
+    },
+    {
+      "file": "valid/cascading-partial-path.json",
+      "valid": true,
+      "description": "With require_full_path: false a valid path prefix is a complete answer (§8.2)."
+    },
+    {
+      "file": "valid/ontology-only-document.json",
+      "valid": true,
+      "description": "Fields with empty files, parts, and annotations form an ontology document (§13)."
+    },
+    {
+      "file": "invalid/s3-missing-annotations-array.json",
+      "valid": false,
+      "rule": "§3",
+      "description": "Every top-level array is required, even when empty."
+    },
+    {
+      "file": "invalid/s3-wrong-version.json",
+      "valid": false,
+      "rule": "§3",
+      "description": "This folder's validator checks jameson_version \"0.5\" only."
+    },
+    {
+      "file": "invalid/rule1-part-unknown-file.json",
+      "valid": false,
+      "rule": "§16 rule 1",
+      "description": "part.file_id references no file."
+    },
+    {
+      "file": "invalid/rule1-annotation-unknown-field.json",
+      "valid": false,
+      "rule": "§16 rule 1",
+      "description": "values[].field_id references no field."
+    },
+    {
+      "file": "invalid/rule1-annotation-unknown-part.json",
+      "valid": false,
+      "rule": "§16 rule 1",
+      "description": "annotation.part_id references no part."
+    },
+    {
+      "file": "invalid/rule1-visible-when-unknown-field.json",
+      "valid": false,
+      "rule": "§16 rule 1",
+      "description": "visible_when.field_name names no field."
+    },
+    {
+      "file": "invalid/rule2-duplicate-part-id.json",
+      "valid": false,
+      "rule": "§16 rule 2",
+      "description": "Two parts share an id."
+    },
+    {
+      "file": "invalid/rule2-duplicate-field-name.json",
+      "valid": false,
+      "rule": "§16 rule 2",
+      "description": "Two fields share a name."
+    },
+    {
+      "file": "invalid/rule2-duplicate-option-value.json",
+      "valid": false,
+      "rule": "§16 rule 2",
+      "description": "Two options of one field share a value."
+    },
+    {
+      "file": "invalid/rule3-unregistered-part-type.json",
+      "valid": false,
+      "rule": "§7",
+      "description": "Part types must be registered or x- prefixed."
+    },
+    {
+      "file": "invalid/rule3-row-without-row-index.json",
+      "valid": false,
+      "rule": "§7",
+      "description": "A row part's locator requires row_index."
+    },
+    {
+      "file": "invalid/rule3-file-part-with-locator.json",
+      "valid": false,
+      "rule": "§7",
+      "description": "file parts must omit locator."
+    },
+    {
+      "file": "invalid/rule3-two-file-parts.json",
+      "valid": false,
+      "rule": "§16 rule 3",
+      "description": "At most one file part per file."
+    },
+    {
+      "file": "invalid/rule3-duplicate-frame-index.json",
+      "valid": false,
+      "rule": "§16 rule 3",
+      "description": "At most one frame part per (file_id, frame_index)."
+    },
+    {
+      "file": "invalid/rule3-keyframe-on-frame.json",
+      "valid": false,
+      "rule": "§16 rule 3",
+      "description": "keyframe appears only on region parts."
+    },
+    {
+      "file": "invalid/rule3-negative-index.json",
+      "valid": false,
+      "rule": "§7",
+      "description": "Indices are zero-based non-negative integers."
+    },
+    {
+      "file": "invalid/rule3-segment-half-pair.json",
+      "valid": false,
+      "rule": "§7",
+      "description": "A segment needs a complete start/end pair."
+    },
+    {
+      "file": "invalid/rule3-node-path-missing-index.json",
+      "valid": false,
+      "rule": "§7",
+      "description": "Every node_path element except the root carries [n]."
+    },
+    {
+      "file": "invalid/rule4-parent-cycle.json",
+      "valid": false,
+      "rule": "§16 rule 4",
+      "description": "parent_part_id must form a forest."
+    },
+    {
+      "file": "invalid/rule4-parent-other-file.json",
+      "valid": false,
+      "rule": "§16 rule 4",
+      "description": "A child and its parent belong to the same file."
+    },
+    {
+      "file": "invalid/rule4-node-path-not-extending-parent.json",
+      "valid": false,
+      "rule": "§16 rule 4",
+      "description": "A child's node_path extends its parent's."
+    },
+    {
+      "file": "invalid/rule4-segment-outside-parent.json",
+      "valid": false,
+      "rule": "§16 rule 4",
+      "description": "A child segment lies within its parent's time range."
+    },
+    {
+      "file": "invalid/rule4-span-outside-parent.json",
+      "valid": false,
+      "rule": "§16 rule 4",
+      "description": "A child span lies within its parent's character range."
+    },
+    {
+      "file": "invalid/rule5-track-id-to-non-track.json",
+      "valid": false,
+      "rule": "§16 rule 5",
+      "description": "track_id must reference a track part."
+    },
+    {
+      "file": "invalid/rule5-track-with-track-id.json",
+      "valid": false,
+      "rule": "§16 rule 5",
+      "description": "track parts do not carry track_id."
+    },
+    {
+      "file": "invalid/rule6-unknown-option.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "single_select values must be option values."
+    },
+    {
+      "file": "invalid/rule6-number-below-min.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "Numbers honor min."
+    },
+    {
+      "file": "invalid/rule6-number-off-step.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "Numbers honor step (12.505 is not a multiple of 0.01)."
+    },
+    {
+      "file": "invalid/rule6-text-too-long.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "Text honors max_length."
+    },
+    {
+      "file": "invalid/rule6-wrong-type.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "A number field's value must be a number, not a string."
+    },
+    {
+      "file": "invalid/rule6-duplicate-field-in-annotation.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "A field appears at most once per annotation."
+    },
+    {
+      "file": "invalid/rule6-bbox-wrong-length.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "bbox is exactly [x, y, width, height]."
+    },
+    {
+      "file": "invalid/rule6-cascading-unknown-path.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "A cascading value must walk the taxonomy from the root."
+    },
+    {
+      "file": "invalid/rule6-cascading-prefix-when-full-required.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "With require_full_path: true the path must reach a leaf."
+    },
+    {
+      "file": "invalid/rule6-keypoints-unrostered-landmark.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "keypoints values use only rostered landmark names."
+    },
+    {
+      "file": "invalid/rule6-mask-counts-mismatch.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "RLE counts must sum to height * width."
+    },
+    {
+      "file": "invalid/rule6-bbox3d-rotation-and-quaternion.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "bbox3d has exactly one of rotation or quaternion."
+    },
+    {
+      "file": "invalid/rule6-polygon-too-few-points.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "A polygon has at least 3 points."
+    },
+    {
+      "file": "invalid/rule6-format-email.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "A text value honors its registered format."
+    },
+    {
+      "file": "invalid/rule6-date-not-iso.json",
+      "valid": false,
+      "rule": "§16 rule 6",
+      "description": "Dates are ISO 8601 (YYYY-MM-DD)."
+    },
+    {
+      "file": "invalid/rule7-geometry-on-file-part.json",
+      "valid": false,
+      "rule": "§16 rule 7",
+      "description": "Geometry values appear only on region parts."
+    },
+    {
+      "file": "invalid/rule7-region-without-geometry.json",
+      "valid": false,
+      "rule": "§16 rule 7",
+      "description": "A region part has exactly one geometry-defining annotation."
+    },
+    {
+      "file": "invalid/rule7-competing-geometry-on-one-region.json",
+      "valid": false,
+      "rule": "§16 rule 7",
+      "description": "Each drawing is its own region part: a second box on region 103 is not allowed."
+    },
+    {
+      "file": "invalid/rule7-resolved-region-geometry-on-opinion.json",
+      "valid": false,
+      "rule": "§16 rule 7",
+      "description": "A resolved region's geometry is carried by its resolved: true annotation."
+    },
+    {
+      "file": "invalid/rule7-two-geometry-values.json",
+      "valid": false,
+      "rule": "§16 rule 7",
+      "description": "An annotation carries at most one geometry value."
+    },
+    {
+      "file": "invalid/rule8-answer-missing-required.json",
+      "valid": false,
+      "rule": "§16 rule 8",
+      "description": "A resolved answer must answer every visible required field."
+    },
+    {
+      "file": "invalid/rule8-simple-answer-missing-required.json",
+      "valid": false,
+      "rule": "§16 rule 8",
+      "description": "In a simple document every annotation is an answer and must satisfy required."
+    },
+    {
+      "file": "invalid/rule8-visible-when-forward-reference.json",
+      "valid": false,
+      "rule": "§10.1",
+      "description": "visible_when may only reference a field at a smaller index (§10.1)."
+    },
+    {
+      "file": "invalid/rule9-two-answers-on-one-part.json",
+      "valid": false,
+      "rule": "§16 rule 9",
+      "description": "At most one resolved: true annotation per part."
+    },
+    {
+      "file": "invalid/rule9-simple-document-two-annotations.json",
+      "valid": false,
+      "rule": "§16 rule 9",
+      "description": "Without resolved flags a part carries at most one annotation."
+    },
+    {
+      "file": "invalid/rule9-from-annotation-ids-unknown.json",
+      "valid": false,
+      "rule": "§16 rule 9",
+      "description": "from_annotation_ids references existing annotations."
+    },
+    {
+      "file": "invalid/rule9-from-annotation-ids-self.json",
+      "valid": false,
+      "rule": "§16 rule 9",
+      "description": "from_annotation_ids never references the annotation itself."
+    },
+    {
+      "file": "invalid/rule10-min-greater-than-max.json",
+      "valid": false,
+      "rule": "§8.6",
+      "description": "A constraint set admitting no value is rejected at import."
+    },
+    {
+      "file": "invalid/rule10-min-and-exclusive-min.json",
+      "valid": false,
+      "rule": "§8.3",
+      "description": "min and exclusive_min must not both be present."
+    },
+    {
+      "file": "invalid/rule10-step-not-positive.json",
+      "valid": false,
+      "rule": "§8.6",
+      "description": "step must be > 0."
+    },
+    {
+      "file": "invalid/rule10-integer-coherence.json",
+      "valid": false,
+      "rule": "§8.3.2",
+      "description": "integer: true requires whole-number bounds and step."
+    },
+    {
+      "file": "invalid/rule10-constraint-illegal-for-type.json",
+      "valid": false,
+      "rule": "§8.3",
+      "description": "max_length is not a legal constraint on a number field."
+    },
+    {
+      "file": "invalid/rule10-unsafe-pattern.json",
+      "valid": false,
+      "rule": "§8.6",
+      "description": "Backreferences are outside the linear-time safe pattern subset."
+    },
+    {
+      "file": "invalid/rule10-json-schema-remote-ref.json",
+      "valid": false,
+      "rule": "§8.6",
+      "description": "json_schema must be self-contained: no remote $ref."
+    },
+    {
+      "file": "invalid/rule10-max-items-exceeds-options.json",
+      "valid": false,
+      "rule": "§8.6",
+      "description": "max_items may not exceed the number of options."
+    },
+    {
+      "file": "invalid/rule10-integer-range-empty.json",
+      "valid": false,
+      "rule": "§8.6",
+      "description": "integer: true with bounds that contain no whole number."
+    },
+    {
+      "file": "invalid/s8-options-on-text-field.json",
+      "valid": false,
+      "rule": "§8",
+      "description": "options are forbidden outside select types."
+    },
+    {
+      "file": "invalid/s8-select-without-options.json",
+      "valid": false,
+      "rule": "§8",
+      "description": "single_select requires options."
+    },
+    {
+      "file": "invalid/s8-bare-string-options.json",
+      "valid": false,
+      "rule": "§8.1",
+      "description": "Options are objects, never bare strings."
+    },
+    {
+      "file": "invalid/s8-cascading-one-level.json",
+      "valid": false,
+      "rule": "§8.2",
+      "description": "cascading_select needs at least 2 levels."
+    },
+    {
+      "file": "invalid/s8-unregistered-render-hint.json",
+      "valid": false,
+      "rule": "§8.5",
+      "description": "Render hints are registered per type or x- prefixed."
+    },
+    {
+      "file": "invalid/s8-unregistered-format.json",
+      "valid": false,
+      "rule": "§8.3.1",
+      "description": "Formats are registered or x- prefixed."
+    },
+    {
+      "file": "invalid/s9-unregistered-field-type.json",
+      "valid": false,
+      "rule": "§9.6",
+      "description": "Field types are registered or x- prefixed."
+    },
+    {
+      "file": "invalid/s10-operator-type-mismatch.json",
+      "valid": false,
+      "rule": "§10",
+      "description": "is_true can only test a boolean trigger."
+    },
+    {
+      "file": "invalid/s12-resolved-not-boolean.json",
+      "valid": false,
+      "rule": "§12",
+      "description": "resolved is a boolean."
+    },
+    {
+      "file": "invalid/s12-values-not-array.json",
+      "valid": false,
+      "rule": "§12",
+      "description": "values is an array of {field_id, value}."
+    },
+    {
+      "file": "invalid/s5-file-type-with-dot.json",
+      "valid": false,
+      "rule": "§5",
+      "description": "file_type is a lowercase extension without the dot."
+    }
+  ]
+}

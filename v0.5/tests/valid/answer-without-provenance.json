@@ -1,0 +1,193 @@
+{
+  "jameson_version": "0.5",
+  "info": {
+    "description": "An answer whose origin is unknown carries resolved: true and no provenance (§12.3)."
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "dog.jpg",
+      "file_type": "jpg",
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "parts": [
+    {
+      "id": 100,
+      "file_id": 1,
+      "type": "file"
+    },
+    {
+      "id": 101,
+      "file_id": 1,
+      "type": "region",
+      "parent_part_id": 100
+    },
+    {
+      "id": 102,
+      "file_id": 1,
+      "type": "region",
+      "parent_part_id": 100
+    },
+    {
+      "id": 103,
+      "file_id": 1,
+      "type": "region",
+      "parent_part_id": 100
+    }
+  ],
+  "fields": [
+    {
+      "id": 1,
+      "name": "is_clear",
+      "label": "Is the image clear?",
+      "type": "boolean",
+      "required": true
+    },
+    {
+      "id": 2,
+      "name": "dog_count",
+      "label": "How many dogs?",
+      "type": "number",
+      "required": true,
+      "constraints": {
+        "min": 0,
+        "integer": true
+      }
+    },
+    {
+      "id": 3,
+      "name": "bbox",
+      "label": "Dog",
+      "type": "bbox"
+    }
+  ],
+  "categories": [],
+  "annotations": [
+    {
+      "id": 1,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": {
+        "source": "human",
+        "role": "labeler",
+        "author": "labeler-a",
+        "created_at": "2026-10-20T14:00:00Z"
+      },
+      "values": [
+        {
+          "field_id": 1,
+          "value": true
+        },
+        {
+          "field_id": 2,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": {
+        "source": "human",
+        "role": "labeler",
+        "author": "labeler-b",
+        "created_at": "2026-10-20T14:00:00Z"
+      },
+      "values": [
+        {
+          "field_id": 1,
+          "value": true
+        },
+        {
+          "field_id": 2,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "part_id": 100,
+      "resolved": true,
+      "values": [
+        {
+          "field_id": 1,
+          "value": true
+        },
+        {
+          "field_id": 2,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "part_id": 101,
+      "resolved": false,
+      "provenance": {
+        "source": "human",
+        "role": "labeler",
+        "author": "labeler-a",
+        "created_at": "2026-10-20T14:00:00Z"
+      },
+      "values": [
+        {
+          "field_id": 3,
+          "value": [
+            100,
+            120,
+            200,
+            150
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "part_id": 102,
+      "resolved": false,
+      "provenance": {
+        "source": "human",
+        "role": "labeler",
+        "author": "labeler-b",
+        "created_at": "2026-10-20T14:00:00Z"
+      },
+      "values": [
+        {
+          "field_id": 3,
+          "value": [
+            104,
+            118,
+            196,
+            154
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "part_id": 103,
+      "resolved": true,
+      "provenance": {
+        "source": "consensus",
+        "from_annotation_ids": [
+          4,
+          5
+        ]
+      },
+      "values": [
+        {
+          "field_id": 3,
+          "value": [
+            102,
+            119,
+            198,
+            152
+          ]
+        }
+      ]
+    }
+  ]
+}
