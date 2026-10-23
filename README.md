@@ -56,13 +56,14 @@ files                  one entry per logical source asset
       └── track_id     identity across frames/regions ("this box and that box are the same car")
 fields                 the embedded ontology: types, options, taxonomies, constraints, visibility
 categories             optional COCO-style primary classes
-annotations            values linking parts to fields (with optional provenance)
+annotations            values linking parts to fields: raw opinions, and one resolved answer per part
 ```
 
 Key rules that keep the format interoperable (all consequences of the core principles above):
 
 - **Geometry rule.** Every drawn instance (2D box, polygon, mask, pose, 3D cuboid) is a `region` part with exactly one geometry-defining annotation. Images, video frames, and meshes all follow the same rule.
 - **Constraint enforcement contract.** Constraints are validated at ontology import, honored by the rendered widget, and re-validated at submission. An ontology that imports successfully is guaranteed renderable and answerable.
+- **Answers vs. opinions.** A document can carry every labeler's, reviewer's, and model's raw answers side by side; the decided answer for each part is one more annotation flagged `resolved: true`. How it was decided — consensus, reviewer sign-off, AI adjudication — is the producer's policy, recorded in optional `provenance` or not at all.
 - **Ontology documents.** A JAMESON file may carry *only* an ontology — making JAMESON a schema-interchange format: author a labeling form anywhere, upload it into a labeling tool, and it renders.
 
 ## Supported modalities
@@ -83,7 +84,8 @@ Key rules that keep the format interoperable (all consequences of the core princ
 
 | Version | Status | Spec | Examples |
 | --- | --- | --- | --- |
-| [v0.4](v0.4/README.md) | Current draft | [v0.4/README.md](v0.4/README.md) | [v0.4/examples/](v0.4/examples/) |
+| [v0.5](v0.5/README.md) | Current draft | [v0.5/README.md](v0.5/README.md) | [v0.5/examples/](v0.5/examples/) |
+| [v0.4](v0.4/README.md) | Superseded | [v0.4/README.md](v0.4/README.md) | [v0.4/examples/](v0.4/examples/) |
 | [v0.3](v0.3/README.md) | Superseded | [v0.3/README.md](v0.3/README.md) | [v0.3/examples/](v0.3/examples/) |
 
 Each version directory is immutable once superseded: it contains that version's full specification and example documents that conform to it. Minor versions add optional fields and registry entries without breaking existing files; consumers must ignore unknown fields.
@@ -94,7 +96,7 @@ A spreadsheet row classified by a form with a radio field:
 
 ```json
 {
-  "jameson_version": "0.4",
+  "jameson_version": "0.5",
   "info": { "description": "Invoice row classification" },
   "files": [ { "id": 1, "file_name": "invoices_q3.xlsx", "file_type": "xlsx" } ],
   "parts": [
@@ -117,7 +119,7 @@ A spreadsheet row classified by a form with a radio field:
 }
 ```
 
-See [v0.4/examples/](v0.4/examples/) for complete documents covering object detection, pose, video multi-object tracking, speech diarization, text NER with coreference, GLB quality review, spreadsheet labeling, PDF labeling, and a standalone ontology document.
+See [v0.5/examples/](v0.5/examples/) for complete documents covering object detection, pose, video multi-object tracking, speech diarization, text NER with coreference, GLB quality review, spreadsheet labeling, PDF labeling, multi-labeler consensus with resolved answers, and a standalone ontology document.
 
 ## License
 
