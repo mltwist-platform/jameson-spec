@@ -52,6 +52,7 @@ It follows the spirit of COCO (multiple files in one document, explicit objects,
 files                  one entry per logical source asset
  └── parts             every labelable unit: file, mesh, row, frame, track, segment, region, page, span
       ├── locator      the part's address in the source file's own reference system
+      ├── source_id    the data owner's own id for the unit (a sheet's ID column)
       ├── parent_part_id   structural containment (scene graphs, frames→regions, utterances→words)
       └── track_id     identity across frames/regions ("this box and that box are the same car")
 fields                 the embedded ontology: types, options, taxonomies, constraints, visibility
@@ -84,7 +85,8 @@ Key rules that keep the format interoperable (all consequences of the core princ
 
 | Version | Status | Spec | Examples |
 | --- | --- | --- | --- |
-| [v0.5](v0.5/README.md) | Current draft | [v0.5/README.md](v0.5/README.md) | [v0.5/examples/](v0.5/examples/) |
+| [v0.6](v0.6/README.md) | Current draft | [v0.6/README.md](v0.6/README.md) | [v0.6/examples/](v0.6/examples/) |
+| [v0.5](v0.5/README.md) | Superseded | [v0.5/README.md](v0.5/README.md) | [v0.5/examples/](v0.5/examples/) |
 | [v0.4](v0.4/README.md) | Superseded | [v0.4/README.md](v0.4/README.md) | [v0.4/examples/](v0.4/examples/) |
 | [v0.3](v0.3/README.md) | Superseded | [v0.3/README.md](v0.3/README.md) | [v0.3/examples/](v0.3/examples/) |
 
@@ -96,11 +98,11 @@ A spreadsheet row classified by a form with a radio field:
 
 ```json
 {
-  "jameson_version": "0.5",
+  "jameson_version": "0.6",
   "info": { "description": "Invoice row classification" },
   "files": [ { "id": 1, "file_name": "invoices_q3.xlsx", "file_type": "xlsx" } ],
   "parts": [
-    { "id": 501, "file_id": 1, "type": "row",
+    { "id": 501, "file_id": 1, "type": "row", "source_id": "INV-2026-00412",
       "locator": { "sheet": "Sheet1", "row_index": 42 } }
   ],
   "fields": [
@@ -119,7 +121,7 @@ A spreadsheet row classified by a form with a radio field:
 }
 ```
 
-See [v0.5/examples/](v0.5/examples/) for complete documents covering object detection, pose, video multi-object tracking, speech diarization, text NER with coreference, GLB quality review, spreadsheet labeling, PDF labeling, multi-labeler consensus with resolved answers, and a standalone ontology document.
+See [v0.6/examples/](v0.6/examples/) for complete documents covering object detection, pose, video multi-object tracking, speech diarization, text NER with coreference, GLB quality review, spreadsheet labeling, PDF labeling, multi-labeler consensus with resolved answers, and a standalone ontology document.
 
 ## License
 
