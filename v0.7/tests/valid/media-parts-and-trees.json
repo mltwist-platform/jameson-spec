@@ -1,0 +1,163 @@
+{
+  "jameson_version": "0.7",
+  "info": {
+    "description": "Track, frame, region with keyframe, nested segments, GLB meshes with an escaped node_path, nested spans (§6, §7, §14)."
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "clip.mp4",
+      "file_type": "mp4",
+      "fps": 30,
+      "frame_count": 300
+    },
+    {
+      "id": 2,
+      "file_name": "car.glb",
+      "file_type": "glb"
+    },
+    {
+      "id": 3,
+      "file_name": "story.txt",
+      "file_type": "txt"
+    }
+  ],
+  "parts": [
+    {
+      "id": 10,
+      "file_id": 1,
+      "type": "track",
+      "name": "car_1"
+    },
+    {
+      "id": 11,
+      "file_id": 1,
+      "type": "frame",
+      "locator": {
+        "frame_index": 0,
+        "timestamp": 0.0
+      }
+    },
+    {
+      "id": 12,
+      "file_id": 1,
+      "type": "region",
+      "parent_part_id": 11,
+      "track_id": 10,
+      "keyframe": true
+    },
+    {
+      "id": 13,
+      "file_id": 1,
+      "type": "segment",
+      "locator": {
+        "start_time": 0.0,
+        "end_time": 5.0
+      }
+    },
+    {
+      "id": 14,
+      "file_id": 1,
+      "type": "segment",
+      "parent_part_id": 13,
+      "locator": {
+        "start_time": 1.0,
+        "end_time": 2.0
+      }
+    },
+    {
+      "id": 20,
+      "file_id": 2,
+      "type": "file"
+    },
+    {
+      "id": 21,
+      "file_id": 2,
+      "type": "mesh",
+      "parent_part_id": 20,
+      "locator": {
+        "node_path": "Root/Body[0]"
+      }
+    },
+    {
+      "id": 22,
+      "file_id": 2,
+      "type": "mesh",
+      "parent_part_id": 21,
+      "locator": {
+        "node_path": "Root/Body[0]/Wheel\\/FL[3]"
+      }
+    },
+    {
+      "id": 30,
+      "file_id": 3,
+      "type": "span",
+      "locator": {
+        "start_char": 0,
+        "end_char": 40
+      }
+    },
+    {
+      "id": 31,
+      "file_id": 3,
+      "type": "span",
+      "parent_part_id": 30,
+      "locator": {
+        "start_char": 0,
+        "end_char": 8
+      }
+    }
+  ],
+  "fields": [
+    {
+      "id": 1,
+      "name": "bbox",
+      "label": "Box",
+      "type": "bbox"
+    },
+    {
+      "id": 2,
+      "name": "note",
+      "label": "Note",
+      "type": "text"
+    }
+  ],
+  "categories": [],
+  "annotations": [
+    {
+      "id": 1,
+      "part_id": 12,
+      "values": [
+        {
+          "field_id": 1,
+          "value": [
+            10,
+            10,
+            50,
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "part_id": 22,
+      "values": [
+        {
+          "field_id": 2,
+          "value": "flat tire"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "part_id": 31,
+      "values": [
+        {
+          "field_id": 2,
+          "value": "person"
+        }
+      ]
+    }
+  ]
+}

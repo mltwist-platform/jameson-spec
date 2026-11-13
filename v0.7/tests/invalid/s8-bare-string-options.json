@@ -1,0 +1,90 @@
+{
+  "jameson_version": "0.7",
+  "info": {
+    "description": "Options are objects, never bare strings."
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "invoices.xlsx",
+      "file_type": "xlsx"
+    }
+  ],
+  "parts": [
+    {
+      "id": 501,
+      "file_id": 1,
+      "type": "row",
+      "locator": {
+        "row_index": 1
+      }
+    },
+    {
+      "id": 502,
+      "file_id": 1,
+      "type": "row",
+      "locator": {
+        "row_index": 2
+      }
+    }
+  ],
+  "fields": [
+    {
+      "id": 1,
+      "name": "doc_type",
+      "label": "Document Type",
+      "type": "single_select",
+      "required": true,
+      "options": [
+        "invoice",
+        "receipt"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "amount",
+      "label": "Amount",
+      "type": "number",
+      "constraints": {
+        "min": 0,
+        "step": 0.01
+      }
+    },
+    {
+      "id": 3,
+      "name": "notes",
+      "label": "Notes",
+      "type": "text",
+      "constraints": {
+        "max_length": 200
+      }
+    }
+  ],
+  "categories": [],
+  "annotations": [
+    {
+      "id": 1,
+      "part_id": 501,
+      "values": [
+        {
+          "field_id": 1,
+          "value": "invoice"
+        },
+        {
+          "field_id": 2,
+          "value": 12.5
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "part_id": 502,
+      "values": [
+        {
+          "field_id": 1,
+          "value": "receipt"
+        }
+      ]
+    }
+  ]
+}

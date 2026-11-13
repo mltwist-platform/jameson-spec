@@ -1,0 +1,216 @@
+{
+  "jameson_version": "0.7",
+  "info": {
+    "description": "Multi-opinion image export (§12.2): three labelers, a model prelabel, and a reviewer each recorded their own answers; the document also carries the decided answer for every part, flagged resolved: true. Whole-image questions are resolved by a reviewer who changed one answer; each dog is boxed separately by every labeler and resolved to one box — the second dog's answer carries no provenance, showing an answer whose origin was not recorded. One labeler's stray box has no answer, so it is not part of the resolved set.",
+    "contributor": "MLtwist",
+    "date_created": "2026-10-22T18:00:00Z"
+  },
+  "files": [
+    {
+      "id": 1,
+      "file_name": "park/dogs_014.jpg",
+      "file_type": "jpg",
+      "source_id": "a71c3e52-0b9d-4f6e-8c21-3d4e5f6a7b8c",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "parts": [
+    { "id": 100, "file_id": 1, "type": "file", "name": "dogs_014" },
+
+    { "id": 201, "file_id": 1, "type": "region", "name": "dog_1 (labeler-a)", "parent_part_id": 100 },
+    { "id": 202, "file_id": 1, "type": "region", "name": "dog_1 (labeler-b)", "parent_part_id": 100 },
+    { "id": 203, "file_id": 1, "type": "region", "name": "dog_1 (labeler-c)", "parent_part_id": 100 },
+    { "id": 204, "file_id": 1, "type": "region", "name": "dog_1 (resolved)", "parent_part_id": 100 },
+
+    { "id": 211, "file_id": 1, "type": "region", "name": "dog_2 (labeler-a)", "parent_part_id": 100 },
+    { "id": 212, "file_id": 1, "type": "region", "name": "dog_2 (labeler-b)", "parent_part_id": 100 },
+    { "id": 213, "file_id": 1, "type": "region", "name": "dog_2 (resolved)", "parent_part_id": 100 },
+
+    { "id": 221, "file_id": 1, "type": "region", "name": "stray box (labeler-c)", "parent_part_id": 100 }
+  ],
+  "fields": [
+    { "id": 1, "name": "is_realistic", "label": "Is this a realistic photograph?", "type": "boolean",
+      "required": true },
+    { "id": 2, "name": "dog_count", "label": "How many dogs are in the image?", "type": "number",
+      "required": true, "constraints": { "min": 0, "integer": true } },
+    { "id": 3, "name": "lighting", "label": "Lighting", "type": "single_select", "required": true,
+      "render": "radio",
+      "options": [
+        { "value": "daylight", "label": "Daylight" },
+        { "value": "indoor", "label": "Indoor" },
+        { "value": "night", "label": "Night" }
+      ] },
+    { "id": 4, "name": "bbox", "label": "Dog", "type": "bbox" },
+    { "id": 5, "name": "breed_group", "label": "Breed Group", "type": "single_select",
+      "options": [
+        { "value": "herding", "label": "Herding" },
+        { "value": "retriever", "label": "Retriever" },
+        { "value": "terrier", "label": "Terrier" }
+      ] }
+  ],
+  "categories": [
+    { "id": 1, "name": "dog", "supercategory": "animal" }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": { "source": "model", "author": "scene-qa-v2", "created_at": "2026-10-20T09:00:00Z" },
+      "values": [
+        { "field_id": 1, "value": true },
+        { "field_id": 2, "value": 1 },
+        { "field_id": 3, "value": "daylight" }
+      ]
+    },
+    {
+      "id": 2,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "5b0e6f1a-2c3d-4e5f-8a9b-0c1d2e3f4a5b", "created_at": "2026-10-20T14:02:00Z" },
+      "values": [
+        { "field_id": 1, "value": true },
+        { "field_id": 2, "value": 2 },
+        { "field_id": 3, "value": "daylight" }
+      ]
+    },
+    {
+      "id": 3,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "6c1f7a2b-3d4e-4f60-9b0c-1d2e3f4a5b6c", "created_at": "2026-10-20T14:10:00Z" },
+      "values": [
+        { "field_id": 1, "value": true },
+        { "field_id": 2, "value": 2 },
+        { "field_id": 3, "value": "indoor" }
+      ]
+    },
+    {
+      "id": 4,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "7d2a8b3c-4e5f-4061-8c1d-2e3f4a5b6c7d", "created_at": "2026-10-20T14:25:00Z" },
+      "values": [
+        { "field_id": 1, "value": true },
+        { "field_id": 2, "value": 3 },
+        { "field_id": 3, "value": "indoor" }
+      ]
+    },
+    {
+      "id": 5,
+      "part_id": 100,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "reviewer", "author": "8e3b9c4d-5f60-4172-9d2e-3f4a5b6c7d8e", "created_at": "2026-10-21T10:30:00Z" },
+      "values": [
+        { "field_id": 3, "value": "daylight" }
+      ]
+    },
+    {
+      "id": 6,
+      "part_id": 100,
+      "resolved": true,
+      "provenance": {
+        "source": "human",
+        "role": "reviewer",
+        "author": "8e3b9c4d-5f60-4172-9d2e-3f4a5b6c7d8e",
+        "created_at": "2026-10-21T10:31:00Z",
+        "from_annotation_ids": [2, 3, 4, 5]
+      },
+      "values": [
+        { "field_id": 1, "value": true },
+        { "field_id": 2, "value": 2 },
+        { "field_id": 3, "value": "daylight" }
+      ]
+    },
+
+    {
+      "id": 11,
+      "part_id": 201,
+      "category_id": 1,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "5b0e6f1a-2c3d-4e5f-8a9b-0c1d2e3f4a5b", "created_at": "2026-10-20T14:02:00Z" },
+      "values": [
+        { "field_id": 4, "value": [412, 380, 260, 210] },
+        { "field_id": 5, "value": "retriever" }
+      ]
+    },
+    {
+      "id": 12,
+      "part_id": 202,
+      "category_id": 1,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "6c1f7a2b-3d4e-4f60-9b0c-1d2e3f4a5b6c", "created_at": "2026-10-20T14:10:00Z" },
+      "values": [
+        { "field_id": 4, "value": [418, 384, 252, 206] },
+        { "field_id": 5, "value": "retriever" }
+      ]
+    },
+    {
+      "id": 13,
+      "part_id": 203,
+      "category_id": 1,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "7d2a8b3c-4e5f-4061-8c1d-2e3f4a5b6c7d", "created_at": "2026-10-20T14:25:00Z" },
+      "values": [
+        { "field_id": 4, "value": [409, 377, 264, 214] }
+      ]
+    },
+    {
+      "id": 14,
+      "part_id": 204,
+      "category_id": 1,
+      "resolved": true,
+      "provenance": { "source": "consensus", "from_annotation_ids": [11, 12, 13] },
+      "values": [
+        { "field_id": 4, "value": [413, 380.33, 258.67, 210] },
+        { "field_id": 5, "value": "retriever" }
+      ],
+      "extra": { "policy": "mean box of a 3-labeler cluster at IoU >= 0.85" }
+    },
+
+    {
+      "id": 21,
+      "part_id": 211,
+      "category_id": 1,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "5b0e6f1a-2c3d-4e5f-8a9b-0c1d2e3f4a5b", "created_at": "2026-10-20T14:02:00Z" },
+      "values": [
+        { "field_id": 4, "value": [1210, 450, 180, 160] },
+        { "field_id": 5, "value": "terrier" }
+      ]
+    },
+    {
+      "id": 22,
+      "part_id": 212,
+      "category_id": 1,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "6c1f7a2b-3d4e-4f60-9b0c-1d2e3f4a5b6c", "created_at": "2026-10-20T14:10:00Z" },
+      "values": [
+        { "field_id": 4, "value": [1204, 446, 188, 166] },
+        { "field_id": 5, "value": "herding" }
+      ]
+    },
+    {
+      "id": 23,
+      "part_id": 213,
+      "category_id": 1,
+      "resolved": true,
+      "values": [
+        { "field_id": 4, "value": [1207, 448, 184, 163] },
+        { "field_id": 5, "value": "terrier" }
+      ]
+    },
+
+    {
+      "id": 31,
+      "part_id": 221,
+      "category_id": 1,
+      "resolved": false,
+      "provenance": { "source": "human", "role": "labeler", "author": "7d2a8b3c-4e5f-4061-8c1d-2e3f4a5b6c7d", "created_at": "2026-10-20T14:25:00Z" },
+      "values": [
+        { "field_id": 4, "value": [60, 900, 120, 90] }
+      ]
+    }
+  ]
+}
