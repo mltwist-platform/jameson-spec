@@ -27,7 +27,7 @@ Every design decision in the spec traces back to one of these:
 
 1. **Rigid where it matters.** Two independent teams on the same JAMESON version must be able to exchange documents without a conversation. So the spec defines exactly **one way to express each thing**: anything a consumer must read to locate, validate, or render an annotation is a defined field with a normative shape — never free-form metadata, never a choice between equivalent representations. Formats that offer a concept flexible enough to mean several different things force every consumer to implement — and guess between — all of the meanings; that flexibility is precisely what makes two conforming producers mutually unreadable, and JAMESON rejects it. Where producers genuinely need room to experiment, the escape hatch is governed: `x-` prefixed registry values, which consumers may safely ignore.
 
-2. **Extensible without breakage.** Within a major version, the spec only ever *adds*: optional fields, and new entries in the governed registries (part types, field types, string formats, render hints). Consumers must ignore unknown fields and preserve unknown types, so a v0.3 document remains valid and readable under every later v0.x spec, and new modalities and use cases arrive as registry entries — never as forks. Proven `x-` experiments are promoted into the registries by minor versions.
+2. **Extensible without breakage.** Within a major version, the spec only ever *adds* or *relaxes*: optional fields, new entries in the governed registries (part types, field types, string formats, render hints), and validity rules loosened so that more documents conform. It never removes a field or tightens a rule. Consumers must ignore unknown fields and preserve unknown types, so a v0.3 document remains valid and readable under every later v0.x spec, and new modalities and use cases arrive as registry entries — never as forks. A relaxation can still break a consumer's assumption (v0.7 let a part `source_id` repeat), so each one is called out under Compatibility in the spec's changelog (§17). Proven `x-` experiments are promoted into the registries by minor versions.
 
 3. **Self-contained.** A JAMESON document alone is enough to parse, validate, and render everything in it: the ontology travels inside the file, and nothing references a remote resource a validator would have to fetch. There is no out-of-band schema, recipe, or platform to consult.
 
@@ -91,7 +91,7 @@ Key rules that keep the format interoperable (all consequences of the core princ
 | [v0.4](v0.4/README.md) | Superseded | [v0.4/README.md](v0.4/README.md) | [v0.4/examples/](v0.4/examples/) |
 | [v0.3](v0.3/README.md) | Superseded | [v0.3/README.md](v0.3/README.md) | [v0.3/examples/](v0.3/examples/) |
 
-Each version directory is immutable once superseded: it contains that version's full specification and example documents that conform to it. Minor versions add optional fields and registry entries without breaking existing files; consumers must ignore unknown fields.
+Each version directory is immutable once superseded: it contains that version's full specification and example documents that conform to it. Minor versions add optional fields and registry entries, or relax validity rules, without breaking existing files; consumers must ignore unknown fields.
 
 ## Quick example
 
